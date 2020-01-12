@@ -9,15 +9,21 @@ const fs = require('fs')
 const ioServer = require('./modulos/io')
 const monopolio = require('./modulos/monopolio')
 
-ioServer.iniciar(io)
+monopolio.teste()
 
-app.use(express.static(path.join(__dirname, 'pub')))
-app.use(express.static(path.join(__dirname, 'pub/socket.io')))
+//ligarServidor()
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/pub/index.html'))
-})
+function ligarServidor() {
+  ioServer.iniciar(io)
 
-http.listen(3000, () => {
-  console.log('Ouvindo em 3000')
-})
+  app.use(express.static(path.join(__dirname, 'pub')))
+  app.use(express.static(path.join(__dirname, 'pub/socket.io')))
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + '/pub/index.html'))
+  })
+
+  http.listen(3000, () => {
+    console.log('Ouvindo em 3000')
+  })
+}
